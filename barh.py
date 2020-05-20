@@ -2,36 +2,40 @@ import matplotlib.pyplot as plt
 import re
 import numpy as np
 
-
-###### y label = Spieltgage
-
-
-####Plot settings
-#fig, ax = plt.subplots(figsize =(10,6.18))
-'''
-ax.set_yticks(y_pos)
-ax.set_yticklabels(y_pos)
-ax.invert_yaxis() # read labels top-to bottum
-ax.set_xlabel("x-Achse")
-ax.barh(y_pos, x_werte, align="center") # Horizontal bar plot
-#ax.legend(loc="upper right")
-#fig.savefig("graphic.pdf")
-plt.show()
-'''
 #y-axis = Spieltage
-#people = ('A','B','C','D','E','F','G','H')
-Matches = ('1','2','3')
+Matches = ('1','2')
 ## turns = Length of input Bitvector!
 turns = 5
-#segments = 4
-segments = len(Matches)
-#X-werte: numpy array of Length turns
-x = np.arange(1,turns+1)
+#segments = 2
+##first: read turns into lists/numpy arrays, add consecutve numer to 'matches'
+###second: try to map data to matches -> np.array(len(Bitvector_spieler1), len(Bitvector_spieler1))
 
+#generate test data
+#data = 3 + 10* np.random.rand(segments, len(Matches))
+# store np.sum(Bitvector)in ndarray
+input = np.array([[2,4], [3,1]], np.int32)
+#data = 3 + 10* np.random.rand(segments, len(Matches))
+#reinit y_vals to len matches
+y_pos = np.arange(1,len(Matches)+1)
+plt_array = []
+#set width: 0.25
+width = 0.25
+colors ='rg'
+fig, ax = plt.subplots(figsize =(10,6.18))
+##loop over arrays and plot bars
+left = np.zeros(len(Matches))
+for idx, data in enumerate(input):
+    plt_array.append(ax.barh(y_pos, data,
+      align='center',
+      left=left))
+    # accumulate the left-hand offsets
+    #left += data
+ax.set_yticks(y_pos)
+ax.set_yticklabels(Matches)
+ax.set_xlabel('Match turns')
 
-data = 3 + 10* np.random.rand(segments, len(Matches))
-y_pos = np.arange(len(Matches))
-print(f"data= {data}\ny_val={y_pos}")
+plt.show()
+
 '''
 # generate some multi-dimensional data & arbitrary labels
 data = 3 + 10* np.random.rand(segments, len(people))
