@@ -13,23 +13,31 @@ turns = 5
 #generate test data
 #data = 3 + 10* np.random.rand(segments, len(Matches))
 # store np.sum(Bitvector)in ndarray
-input = np.array([[2,4], [3,1]], np.int32)
+input = np.array([[2,3], [4,1]], np.int32)
 #data = 3 + 10* np.random.rand(segments, len(Matches))
 #reinit y_vals to len matches
 y_pos = np.arange(1,len(Matches)+1)
 plt_array = []
 #set width: 0.25
 width = 0.25
-colors ='rg'
+#colors ='rg'
 fig, ax = plt.subplots(figsize =(10,6.18))
 ##loop over arrays and plot bars
 left = np.zeros(len(Matches))
+'''
 for idx, data in enumerate(input):
-    plt_array.append(ax.barh(y_pos, data,
-      align='center',
-      left=left))
+    plt_array.append(ax.barh(y_pos,input[idx,0],color="m",
+               align='center'))
+               #left=left))
+    plt_array.append(ax.barh(y_pos, input[idx,1],color="b",
+                    align='center',left=left))
     # accumulate the left-hand offsets
     #left += data
+    print(idx, input[idx,0], input[idx,1])
+'''
+ax.barh(1,2,color="m",align='center',left=left)
+ax.barh(1,3,color="k",align='center',left=left)
+ax.set_xticks(np.arange(1,6))
 ax.set_yticks(y_pos)
 ax.set_yticklabels(Matches)
 ax.set_xlabel('Match turns')
